@@ -17,13 +17,13 @@ object MealApiClient {
     }
 
     suspend fun getRandomRecipe(): List<Meal>{
-        val url = "https://www.themeldb.com/api/json/v1/1/random.php"
+        val url = "https://www.themealdb.com/api/json/v1/1/random.php"
         val response = apiClient.get(url).body() as MealResponse
         return response.meals
     }
 
     suspend fun getSearchedRecipe(query: String): List<Meal>{
-        val url = "https://www.themeldb.com/api/json/v1/1/search.php?s=$query"
+        val url = "https://www.themealdb.com/api/json/v1/1/search.php?s=$query"
         val response = apiClient.get(url).body() as MealResponse
         return response.meals
     }

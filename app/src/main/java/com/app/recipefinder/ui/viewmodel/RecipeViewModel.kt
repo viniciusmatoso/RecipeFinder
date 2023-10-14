@@ -12,23 +12,10 @@ class RecipeViewModel: ViewModel() {
     private val _state = mutableStateOf<RecipeViewState>(RecipeViewState.Loading)
     val state: State<RecipeViewState> = _state
 
-    fun processIntent(intent: RecipeViewIntent){
-        when(intent){
+    fun processIntent(intent: RecipeViewIntent) {
+        when(intent) {
             is RecipeViewIntent.LoadRandomRecipe -> loadRandomRecipe()
             is RecipeViewIntent.SearchRecipes -> searchRecipe(intent.query)
-        }
-    }
-
-    private fun searchRecipe(query: String) {
-        viewModelScope.launch {
-            _state.value = RecipeViewState.Loading
-            try {
-                _state.value = RecipeViewState.Success(
-                    MealApiClient.getSearchedRecipe(query)
-                )
-            }catch (e: Exception){
-                _state.value = RecipeViewState.Error("Erro!")
-            }
         }
     }
 
@@ -39,9 +26,23 @@ class RecipeViewModel: ViewModel() {
                 _state.value = RecipeViewState.Success(
                     MealApiClient.getRandomRecipe()
                 )
-            } catch (e: Exception){
-                _state.value = RecipeViewState.Error("Erro!")
+            } catch(e: Exception) {
+                _state.value = RecipeViewState.Error("Erro para carregar receitas!")
             }
         }
     }
+
+    private fun searchRecipe(query: String) {
+        viewModelScope.launch {
+            _state.value = RecipeViewState.Loading
+            try {
+                _state.value = RecipeViewState.Success(
+                    MealApiClient.getSearchedRecipe(query)
+                )
+            } catch (e: Exception) {
+                _state.value = RecipeViewState.Error("Error para carregar receitas por query!")
+            }
+        }
+    }
+
 }
