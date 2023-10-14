@@ -15,7 +15,7 @@ import com.app.recipefinder.data.model.Meal
 fun SuccessComponent(recipes: List<Meal>, onSearchClicked: (query: String) -> Unit) {
     Column {
         Text(
-            text = "Recipe Finder",
+            text = "Localizador de Receitas",
             fontWeight = FontWeight(900),
             fontFamily = FontFamily.Cursive,
             fontSize = 32.sp,

@@ -42,7 +42,7 @@ fun SearchComponent(onSearchClicked: (query: String) -> Unit) {
                 }
                 query = it
             },
-            label = { Text("Search") },
+            label = { Text("Pesquisar") },
             singleLine = true,
             isError = errorMessage.isNotBlank(),
             trailingIcon = {
@@ -51,7 +51,7 @@ fun SearchComponent(onSearchClicked: (query: String) -> Unit) {
                         if (query.isNotBlank()) {
                             onSearchClicked(query)
                         } else {
-                            errorMessage = "Enter a query first"
+                            errorMessage = "Digite o texto da receita que procura"
                         }
                     }
                 ) {
